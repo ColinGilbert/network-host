@@ -28,7 +28,7 @@ namespace noob
 			}
 
 
-			bool init(uint32_t host_address, uint16_t port, size_t num_clients, size_t num_channels, uint32_t incoming_bandwidth = 0, uint32_t outgoing_bandwidth = 0) noexcept(true)
+			bool init(const std::string& host_address, uint16_t port, size_t num_clients, size_t num_channels, uint32_t incoming_bandwidth = 0, uint32_t outgoing_bandwidth = 0) noexcept(true)
 			{
 				if (!enet_initialize())
 				{
@@ -37,7 +37,7 @@ namespace noob
 				}
 
 				ENetAddress address_struct;
-				address_struct.host = host_address;
+				enet_address_set_host(address_struct, host_address.c_str());
 				address_struct.port = port;
 
 				local_host = enet_host_create(&address_struct, num_clients, num_channels, incoming_bandwidth, outgoing_bandwidth);
