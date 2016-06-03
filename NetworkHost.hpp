@@ -96,11 +96,12 @@ namespace noob
 									fmt::MemoryWriter ww;
 									ww << "[NetworkHost] " << event.peer->address.host << " just connected!";
 									logger::log(ww.str());
+									clients.insert(rde::make_pair(event.peer->address.host, event.peer));
 									break;
 								}
 							case ENET_EVENT_TYPE_RECEIVE:
 								{
-									recv_fun(std::string(event.packet->data));
+									recv_fun(std::string(static_cast<const unsigned char*>(event.packet->data)));
 									enet_packet_destroy(event.packet);
 									break;
 								}
