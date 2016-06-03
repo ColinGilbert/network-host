@@ -37,7 +37,7 @@ namespace noob
 				}
 
 				ENetAddress address_struct;
-				enet_address_set_host(address_struct, host_address.c_str());
+				enet_address_set_host(&address_struct, host_address.c_str());
 				address_struct.port = port;
 
 				local_host = enet_host_create(&address_struct, num_clients, num_channels, incoming_bandwidth, outgoing_bandwidth);
