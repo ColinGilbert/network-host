@@ -163,7 +163,7 @@ namespace noob
 		protected:
 			ENetHost* local_host;
 			OnReceive recv_fun;
-			OnConnect connect_fun
+			OnConnect connect_fun;
 			rde::hash_map<uint32_t, ENetPeer*> clients;
 	};
 }
