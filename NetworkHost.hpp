@@ -30,7 +30,7 @@ namespace noob
 
 			bool init(const std::string& host_address, uint16_t port, size_t num_clients, size_t num_channels, uint32_t incoming_bandwidth = 0, uint32_t outgoing_bandwidth = 0) noexcept(true)
 			{
-				if (!enet_initialize())
+				if (enet_initialize() > 0)
 				{
 					logger::log("[NetworkHost] Failed to init eNet");
 					return false;
