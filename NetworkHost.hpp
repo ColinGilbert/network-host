@@ -101,7 +101,8 @@ namespace noob
 								}
 							case ENET_EVENT_TYPE_RECEIVE:
 								{
-									recv_fun(std::string(static_cast<const char*>(event.packet->data)));
+									// TODO: Find a better cast than reinterpret_cast
+									recv_fun(std::string(reinterpret_cast<const char*>(event.packet->data)));
 									enet_packet_destroy(event.packet);
 									break;
 								}
