@@ -14,7 +14,8 @@
 namespace noob
 {
 	// OnReceive must be a class with overloaded operator()(const std::string &)
-	template <typename OnReceive> class network_host
+	// OnConnect must be a class with overloaded operator()(uint32_t) with arg referring to host number
+	template <typename OnReceive, typename OnConnect> class network_host
 	{
 		public:
 			network_host() noexcept(true) : local_host(NULL) {}
@@ -97,6 +98,7 @@ namespace noob
 									ww << "[NetworkHost] " << event.peer->address.host << " just connected!";
 									logger::log(ww.str());
 									clients.insert(rde::make_pair(event.peer->address.host, event.peer));
+									connect_fun(event.peer->address.host);
 									break;
 								}
 							case ENET_EVENT_TYPE_RECEIVE:
@@ -161,6 +163,7 @@ namespace noob
 		protected:
 			ENetHost* local_host;
 			OnReceive recv_fun;
+			OnConnect connect_fun
 			rde::hash_map<uint32_t, ENetPeer*> clients;
 	};
 }
