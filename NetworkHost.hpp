@@ -74,6 +74,10 @@ namespace noob
 						{
 							enet_peer_send(p, std::min(channel, local_host->channelLimit), packet);
 						}
+						else
+						{
+							logger::log("Attempting to send to zombie client");
+						}
 					}
 				}
 			}
